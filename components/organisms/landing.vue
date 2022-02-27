@@ -1,8 +1,5 @@
 <template>
-	<v-row
-		align="center"
-		class="b-container landing-container"
-	>
+	<v-row align="center" class="b-container landing-container">
 		<v-col
 			v-if="isSmallScreen"
 			class="d-flex justify-center"
@@ -12,7 +9,14 @@
 			<div class="display-4 font-weight-bold">Web</div>
 		</v-col>
 		<v-col class="d-flex justify-center" cols="12" lg="2">
-			<div></div>
+			<kinesis-container>
+				<kinesis-element type="depth" :strength="10">
+					<v-img
+						src="/img/image-center.png"
+						alt="Cell"
+					/>
+				</kinesis-element>
+			</kinesis-container>
 		</v-col>
 		<v-col
 			v-if="isSmallScreen"
@@ -47,10 +51,10 @@ export default {
 </script>
 
 <style scoped>
-.landing-container {
+/* .landing-container {
 	background-image: url("/img/image-center.png");
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-position: center;
-}
+} */
 </style>

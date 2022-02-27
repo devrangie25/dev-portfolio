@@ -65,11 +65,20 @@ export default {
 
   created(){
     this.$nuxt.$on('page-transition', page => {
-      if (page === 'about-me') {
-        this.dynamicClass = 'bg-1'
-      } else {
-        this.dynamicClass = 'bg'
+      const pages = {
+        'about-me' : 'bg-1',
+        'landing': 'bg',
+        'skills': 'bg-1'
       }
+
+      this.dynamicClass = pages[page]
+
+      console.log('dynamicClass', this.dynamicClass)
+      // if (page === 'about-me') {
+      //   this.dynamicClass = 'bg-1'
+      // } else {
+      //   this.dynamicClass = 'bg'
+      // }
     })
   },
 

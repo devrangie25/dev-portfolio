@@ -7,7 +7,7 @@
 			<div
 				class="display-4 font-weight-bold animate__animated animate__backInUp animate__delay-1s banana_primary--text"
 			>
-				About Me
+				About me
 			</div>
 		</v-col>
 		<v-col cols="12" lg="7" class="d-flex justify-center">
@@ -28,7 +28,7 @@ export default {
 
 	created() {
 		console.log("Created About Me");
-    this.$nuxt.$emit('page-transition', 'about-me')
+    	this.$nuxt.$emit('page-transition', 'about-me')
 	},
 
 	mounted() {

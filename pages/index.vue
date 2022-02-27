@@ -2,6 +2,7 @@
 	<div :class="page === 1 ? 'a-container' : ''">
 		<dr-o-landing v-if="page === 1" />
 		<dr-o-about-me v-if="page === 2" />
+		<dr-o-skills v-if="page === 3" />
 		<dr-a-float-btn-down @click-down-btn="next"/>
     <dr-a-float-btn-up @click-up-btn="prev"  v-if="page !== 1" />
 	</div>
