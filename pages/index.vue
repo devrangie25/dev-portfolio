@@ -1,10 +1,11 @@
 <template>
-	<div :class="page === 1 ? 'a-container' : ''">
+	<div>
 		<dr-o-landing v-if="page === 1" />
 		<dr-o-about-me v-if="page === 2" />
 		<dr-o-skills v-if="page === 3" />
-		<dr-a-float-btn-down @click-down-btn="next"/>
-    <dr-a-float-btn-up @click-up-btn="prev"  v-if="page !== 1" />
+		<dr-o-experience v-if="page === 4" />
+		<!-- <dr-a-float-btn-down @click-down-btn="next" /> -->
+		<!-- <dr-a-float-btn-up @click-up-btn="prev" v-if="page !== 1" /> -->
 	</div>
 </template>
 
@@ -18,6 +19,19 @@ export default {
 			isActive: false,
 			page: 1,
 		};
+	},
+
+	created(){
+		this.$nuxt.$on('page-action', val => {
+			const pages = {
+				'landing': 1,
+				'about-me': 2,
+				'skills': 3,
+				'experience': 4
+			}
+
+			this.page = pages[val]
+		})
 	},
 
 	computed: {
@@ -53,4 +67,6 @@ export default {
 .b-container {
 	height: 80vh;
 }
+
+
 </style>

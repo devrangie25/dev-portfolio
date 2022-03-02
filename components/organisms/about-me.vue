@@ -1,17 +1,17 @@
 <template>
 	<v-row
 		align="center"
-		class="animate__animated animate__backInRight b-container"
+		class="b-container"
 	>
-		<v-col cols="12" lg="5" class="d-flex justify-center">
+		<v-col cols="12" lg="6" class="d-flex justify-center align-center first-col animate__animated animate__backInDown">
 			<div
-				class="display-4 font-weight-bold animate__animated animate__backInUp animate__delay-1s banana_primary--text"
+				class="display-2 font-weight-bold animate__animated animate__backInUp animate__delay-1s black--text"
 			>
 				About me
 			</div>
 		</v-col>
-		<v-col cols="12" lg="7" class="d-flex justify-center">
-			<div class="display-1 font-weight-bold description banana_primary--text">
+		<v-col cols="12" lg="6" class="d-flex justify-center align-center  second-col ">
+			<div class="headline font-weight-bold description banana_primary--text px-12 animate__animated animate__backInRight ">
 				{{ description }}
 			</div>
 		</v-col>
@@ -27,12 +27,7 @@ export default {
 	},
 
 	created() {
-		console.log("Created About Me");
     	this.$nuxt.$emit('page-transition', 'about-me')
-	},
-
-	mounted() {
-		console.log("Mounted About Me");
 	},
 
 	computed: {
@@ -47,6 +42,18 @@ export default {
 </script>
 
 <style scoped>
+
+.first-col {
+	background: #e8d231;
+	height: 80%;
+}
+
+.second-col {
+	background: black;
+	height: 100%;
+}
+
+
 .description {
 	line-height: 3.2rem;
 }
