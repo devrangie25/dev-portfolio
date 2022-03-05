@@ -1,9 +1,8 @@
 <template>
 	<div>
 		<dr-o-landing v-if="page === 1" />
-		<dr-o-about-me v-if="page === 2" />
+		<dr-o-about-mev2 v-if="page === 2" />
 		<dr-o-skills v-if="page === 3" />
-		<dr-o-experience v-if="page === 4" />
 		<!-- <dr-a-float-btn-down @click-down-btn="next" /> -->
 		<!-- <dr-a-float-btn-up @click-up-btn="prev" v-if="page !== 1" /> -->
 	</div>
@@ -12,7 +11,11 @@
 <script>
 export default {
 	name: "index-page",
-	layout: "main",
+	layout(context) {
+		console.log('nuxt', context.app.nuxt)
+		console.log('ctx', context)
+		return 'main'
+	},
 
 	data() {
 		return {
@@ -26,8 +29,7 @@ export default {
 			const pages = {
 				'landing': 1,
 				'about-me': 2,
-				'skills': 3,
-				'experience': 4
+				'skills': 3
 			}
 
 			this.page = pages[val]
@@ -56,17 +58,3 @@ export default {
 	},
 };
 </script>
-
-<style scoped>
-/* .a-container {
-	background-image: url("/img/image-center.png");
-	background-repeat: no-repeat;
-	background-size: cover;
-	background-position: center;
-} */
-.b-container {
-	height: 80vh;
-}
-
-
-</style>

@@ -1,7 +1,7 @@
 <template>
 	<v-row
 		align="center"
-		class="animate__animated animate__backInRight b-container"
+		class="animate__animated animate__backInRight skills-con"
 	>
 		<v-col cols="12" lg="5" class="d-flex justify-center">
 			<div v-if="!isHover" class="banana_primary--text display-2 font-weight-bold">
@@ -76,6 +76,10 @@ export default {
 
 	created() {
 		this.$nuxt.$emit("page-transition", "skills");
+	},
+
+	mounted(){
+		this.$nuxt.$emit('current-page', 'skills')
 	},
 
 	computed: {
@@ -154,6 +158,10 @@ export default {
 </script>
 
 <style scoped>
+
+.skills-con{
+	height: 80vh;
+}
 
 .skills {
 	background-image: url("/img/bracket-yellow.png");

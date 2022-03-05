@@ -1,7 +1,7 @@
 <template>
-	<v-app dark :class="dynamicClass">
-		<div class="center-div">
-			<div class="absolute">
+	<v-app dark :class="`${dynamicClass}`">
+		<div class="center-div ">
+			<div class="absolute" v-if="btnListenerPage === 'landing'">
 				<div class="mb-3">
 					<v-btn fab small>
 						<v-icon> mdi-instagram </v-icon>
@@ -24,20 +24,20 @@
 				</div>
 			</div>
 
-			<div class="bottom-right">
+			<div class="bottom-right" v-if="btnListenerPage === 'landing'">
 				<div class="mb-3">
 					<v-btn fab small>
 						<v-icon> mdi-file-document </v-icon>
 					</v-btn>
 				</div>
 			</div>
-			<v-main>
-				<v-container>
+			<v-main >
+				<v-container >
 					<v-card
 						elevation="24"
-						color="transparent"
-						outlined
+						:color="btnListenerPage === 'about-me' ? 'black' : 'transparent'"
 						height="650"
+						class="pa-0 rounded-lg"
 					>
 						<v-app-bar
 							v-if="true"
@@ -67,7 +67,9 @@
 							<v-btn
 								depressed
 								class="mr-2 text-capitalize font-weight-bold button"
-								text
+								:text="btnListenerPage !== 'landing'"
+								:dark="btnListenerPage === 'landing'"
+								:color="btnListenerPage === 'landing' ? '#1d1d1d' : ''"
 								@click="navActionLink('landing')"
 							>
 								Home
@@ -76,28 +78,23 @@
 							<v-btn
 								depressed
 								class="mr-2 text-capitalize font-weight-bold button"
-								text
 								@click="navActionLink('about-me')"
+								:text="btnListenerPage !== 'about-me'"
+								:dark="btnListenerPage === 'about-me'"
+								:color="btnListenerPage === 'about-me' ? '#1d1d1d' : ''"
 							>
 								About Me
 							</v-btn>
 
 							<v-btn
 								depressed
-								text
 								class="mr-2 text-capitalize font-weight-bold button"
 								@click="navActionLink('skills')"
+								:text="btnListenerPage !== 'skills'"
+								:dark="btnListenerPage === 'skills'"
+								:color="btnListenerPage === 'skills' ? '#1d1d1d' : ''"
 							>
 								Skills
-							</v-btn>
-
-							<v-btn
-								depressed
-								text
-								class="mr-2 text-capitalize font-weight-bold button"
-								@click="navActionLink('experience')"
-							>
-								Job Experience
 							</v-btn>
 
 							<v-btn
@@ -158,7 +155,8 @@ export default {
 	data() {
 		return {
 			activeClass: "bg",
-			currentPage: "",
+			currentPage: "landing",
+			btnListenerPage: ""
 		};
 	},
 
@@ -175,13 +173,17 @@ export default {
 	},
 
 	created() {
+		this.$nuxt.$on('current-page', page => {
+			console.log('Current Page', page)
+			this.btnListenerPage = page
+		})
+
 		this.$nuxt.$on("page-transition", (page) => {
 			this.currentPage = page;
 			const pages = {
 				"about-me": "bg-1",
-				landing: "bg",
-				skills: "bg-1",
-				experience: "bg",
+				"landing": "bg",
+				"skills": "bg-1"
 			};
 
 			this.dynamicClass = pages[page];
@@ -205,11 +207,13 @@ div.bottom-right {
 	position: absolute;
 	bottom: 3rem;
 	right: 6rem;
+	z-index: 1;
 }
 
 div.absolute {
 	position: absolute;
 	left: 6rem;
+	z-index: 1;
 }
 
 .bg {

@@ -1,83 +1,71 @@
 <template>
-	<div class="px-16">
-		<v-row :class="`${width} b-container`">
-			<v-col cols="12" lg="6" class="d-flex align-center justify-center">
-				<div>
-					<v-img
-						src="/img/cropped-center-logo.png"
-						lazy-src="/img/cropped-center-logo.png"
-						alt="Cell"
-					/>
-				</div>
-			</v-col>
-			<v-col cols="12" lg="6" class="d-flex justify-center">
-				<v-card flat color="transparent" class="pt-16">
-					<v-card-title
-						class="font-weight-bold black--text display-2"
-					>
-						Hi, I'm Rangie!
-					</v-card-title>
-					<v-card-subtitle
-						class="font-weight-bold black--text headline"
-					>
-						Web Developer
-					</v-card-subtitle>
-					<v-card-text>
-						<div class="mb-2 d-flex align-center">
-							<v-btn fab small depressed class="btn">
-								<v-icon> mdi-map-marker </v-icon>
-							</v-btn>
-							<span class="mx-2 black--text subtitle-1">
-								<span class="mx-1 font-weight-black"
-									>Address:</span
-								>
-								<span class="font-weight-light">
-									Cebu, Philippines
-								</span>
+	<v-row no-gutters>
+		<v-col cols="12" lg="6" class="d-flex justify-center">
+			<div>
+				<v-img
+					src="/img/cropped-center-logo.png"
+					lazy-src="/img/cropped-center-logo.png"
+					alt="Cell"
+				/>
+			</div>
+		</v-col>
+		<v-col cols="12" lg="6" class="d-flex justify-center">
+			<v-card flat color="transparent" class="pt-16">
+				<v-card-title class="font-weight-bold black--text display-2">
+					Hi, I'm Rangie!
+				</v-card-title>
+				<v-card-subtitle class="font-weight-bold black--text headline">
+					Web Developer
+				</v-card-subtitle>
+				<v-card-text>
+					<div class="mb-2 d-flex align-center">
+						<v-btn fab small depressed class="btn">
+							<v-icon> mdi-map-marker </v-icon>
+						</v-btn>
+						<span class="mx-2 black--text subtitle-1">
+							<span class="mx-1 font-weight-black">Address:</span>
+							<span class="font-weight-light">
+								Cebu, Philippines
 							</span>
-						</div>
-						<div class="mb-2 d-flex align-center">
-							<v-btn fab small depressed class="btn">
-								<v-icon> mdi-phone </v-icon>
-							</v-btn>
-							<span class="mx-2 black--text subtitle-1">
-								<span class="mx-1 font-weight-black"
-									>Phone:</span
-								>
-								<span class="font-weight-light">
-									+639-380-738-443
-								</span>
+						</span>
+					</div>
+					<div class="mb-2 d-flex align-center">
+						<v-btn fab small depressed class="btn">
+							<v-icon> mdi-phone </v-icon>
+						</v-btn>
+						<span class="mx-2 black--text subtitle-1">
+							<span class="mx-1 font-weight-black">Phone:</span>
+							<span class="font-weight-light">
+								+639-380-738-443
 							</span>
-						</div>
-						<div class="mb-2 d-flex align-center">
-							<v-btn fab small depressed class="btn">
-								<v-icon> mdi-email </v-icon>
-							</v-btn>
-							<span class="mx-2 black--text subtitle-1">
-								<span class="mx-1 font-weight-black"
-									>Email:</span
-								>
-								<span class="font-weight-light">
-									devrangie25@gmail.com
-								</span>
+						</span>
+					</div>
+					<div class="mb-2 d-flex align-center">
+						<v-btn fab small depressed class="btn">
+							<v-icon> mdi-email </v-icon>
+						</v-btn>
+						<span class="mx-2 black--text subtitle-1">
+							<span class="mx-1 font-weight-black">Email:</span>
+							<span class="font-weight-light">
+								devrangie25@gmail.com
 							</span>
-						</div>
-						<div class="mb-2 d-flex align-center">
-							<v-btn fab small depressed class="btn">
-								<v-icon> mdi-code-tags </v-icon>
-							</v-btn>
-							<span class="mx-2 black--text subtitle-1">
-								<span class="mx-1 font-weight-black"
-									>Experience:</span
-								>
-								<span class="font-weight-light"> 1+ year </span>
-							</span>
-						</div>
-					</v-card-text>
-				</v-card>
-			</v-col>
-		</v-row>
-	</div>
+						</span>
+					</div>
+					<div class="mb-2 d-flex align-center">
+						<v-btn fab small depressed class="btn">
+							<v-icon> mdi-code-tags </v-icon>
+						</v-btn>
+						<span class="mx-2 black--text subtitle-1">
+							<span class="mx-1 font-weight-black"
+								>Experience:</span
+							>
+							<span class="font-weight-light"> 1+ year </span>
+						</span>
+					</div>
+				</v-card-text>
+			</v-card>
+		</v-col>
+	</v-row>
 </template>
 
 <script>
@@ -85,7 +73,7 @@ export default {
 	name: "landing",
 
 	mounted() {
-		console.log("Landing");
+		this.$nuxt.$emit('current-page', 'landing')
 	},
 
 	computed: {
@@ -135,10 +123,13 @@ export default {
 </script>
 
 <style scoped>
+.landing-con {
+	height: 80vh;
+}
+
 .btn {
 	pointer-events: none;
 }
-
 .small-cover {
 	background-image: url("/img/image-center.png");
 	background-repeat: no-repeat;

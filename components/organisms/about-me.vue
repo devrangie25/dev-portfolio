@@ -1,17 +1,24 @@
 <template>
-	<v-row
-		align="center"
-		class="b-container"
-	>
-		<v-col cols="12" lg="6" class="d-flex justify-center align-center first-col animate__animated animate__backInDown">
+	<v-row align="center">
+		<v-col
+			cols="12"
+			lg="6"
+			class="d-flex justify-center align-center first-col animate__animated animate__backInDown"
+		>
 			<div
 				class="display-2 font-weight-bold animate__animated animate__backInUp animate__delay-1s black--text"
 			>
 				About me
 			</div>
 		</v-col>
-		<v-col cols="12" lg="6" class="d-flex justify-center align-center  second-col ">
-			<div class="headline font-weight-bold description banana_primary--text px-12 animate__animated animate__backInRight ">
+		<v-col
+			cols="12"
+			lg="6"
+			class="d-flex justify-center align-center second-col"
+		>
+			<div
+				class="headline font-weight-bold description banana_primary--text px-12 animate__animated animate__backInRight"
+			>
 				{{ description }}
 			</div>
 		</v-col>
@@ -27,7 +34,11 @@ export default {
 	},
 
 	created() {
-    	this.$nuxt.$emit('page-transition', 'about-me')
+		this.$nuxt.$emit("page-transition", "about-me");
+	},
+
+	mounted(){
+		this.$nuxt.$emit('current-page', 'about-me')
 	},
 
 	computed: {
@@ -42,6 +53,9 @@ export default {
 </script>
 
 <style scoped>
+.about-me {
+	height: 80vh;
+}
 
 .first-col {
 	background: #e8d231;
@@ -52,7 +66,6 @@ export default {
 	background: black;
 	height: 100%;
 }
-
 
 .description {
 	line-height: 3.2rem;
