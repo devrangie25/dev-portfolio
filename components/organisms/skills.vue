@@ -1,15 +1,15 @@
 <template>
 	<v-row
 		align="center"
-		class="animate__animated animate__backInRight skills-con"
+		class="skills-con"
 	>
-		<v-col cols="12" lg="5" class="d-flex justify-center">
-			<div v-if="!isHover" class="banana_primary--text display-2 font-weight-bold">
+		<v-col cols="12" lg="5" class="d-flex justify-center animate__animated animate__backInDown">
+			<div v-if="!isHover" :class="`banana_primary--text ${['extra-large', 'large'].includes(width) ? 'display-3' : 'display-1'} font-weight-bold`">
 				<code>
 					{{ `{ Skills }` }}
 				</code>
 			</div>
-			<div v-else class="banana_primary--text display-2 font-weight-bold">
+			<div v-else :class="`banana_primary--text ${width === 'extra-large' ? 'display-3' : 'display-2'} font-weight-bold`">
 				<code>
 					{{ `{ ${hoverTitle} }` }}
 				</code>
@@ -19,14 +19,14 @@
 			<v-row>
 				<v-col
 					cols="12"
-					class="d-flex justify-center animate__animated animate__backInRight animate__delay-1s"
+					class="d-flex justify-center animate__animated animate__backInUp"
 				>
 					<v-row>
 						<v-col
-							class="d-flex justify-center"
+							:class="`d-flex ${['extra-large', 'large'].includes(width) ? 'justify-end' : 'justify-center'}`"
 							v-for="(skill, i) in skills"
 							:key="i"
-							cols="12"
+							cols="4"
 							lg="3"
 						>
 							<v-hover v-slot="{ hover }" open-delay="50">
@@ -47,7 +47,7 @@
 											<v-img
 												:src="`/img/${skill.icon}`"
 												:lazy-src="`/img/${skill.icon}`"
-												:width="70"
+												:width="['extra-large', 'large', 'medium'].includes(width) ? 70 : 40"
 												class="mx-1"
 											>
 											</v-img>
@@ -76,10 +76,6 @@ export default {
 
 	created() {
 		this.$nuxt.$emit("page-transition", "skills");
-	},
-
-	mounted(){
-		this.$nuxt.$emit('current-page', 'skills')
 	},
 
 	computed: {
@@ -140,11 +136,29 @@ export default {
 			];
 		},
 
-		isSmallScreen() {
-			if (this.$vuetify.breakpoint.lgAndUp) {
-				return true;
+		width() {
+			const screenWidth = this.$vuetify.breakpoint.width;
+
+			if (screenWidth < 600) {
+				console.log("Extra Small Screen");
+				return "extra-small";
 			}
-			return false;
+			if (screenWidth > 600 && screenWidth < 960) {
+				console.log("Small Screen");
+				return "small";
+			}
+			if (screenWidth > 960 && screenWidth < 1264) {
+				console.log("Medium Screen");
+				return "medium";
+			}
+			if (screenWidth > 1264 && screenWidth < 1904) {
+				console.log("Large Screen");
+				return "large";
+			}
+			if (screenWidth > 1904) {
+				console.log("Extra Large Screen");
+				return "extra-large";
+			}
 		},
 	},
 

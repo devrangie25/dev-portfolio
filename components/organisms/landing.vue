@@ -1,69 +1,45 @@
 <template>
-	<v-row no-gutters>
-		<v-col cols="12" lg="6" class="d-flex justify-center">
-			<div>
+	<v-row no-gutters class="landing-con ">
+		<v-col cols="12" lg="6" class="d-flex justify-center align-center">
+			<v-card flat color="transparent" class="animate__animated animate__backInDown">
+				<v-card-title
+					:class="`font-weight-bold black--text text-break ${
+						width === 'extra-large' ? 'display-4' : 'display-3'
+					}`"
+				>
+					Hello, I'm <br />
+					Rangie Laurente
+				</v-card-title>
+				<v-card-subtitle
+					:class="`ml-1 font-weight-light black--text ${
+						width === 'extra-large' ? 'display-2' : 'display-1'
+					} mt-1 text-uppercase`"
+				>
+					Full-Stack Developer
+				</v-card-subtitle>
+				<v-card-actions class="ml-3">
+					<v-btn
+						class="text-none rounded-lg font-weight-black"
+						depressed
+						:width="['extra-small', 'small'].includes(width) ? '100%' : 160"
+						:height="width === 'extra-large' ? 55 : 50"
+						color="black"
+						dark
+					>
+						Hire me
+					</v-btn>
+				</v-card-actions>
+			</v-card>
+		</v-col>
+		<v-col v-if="['extra-large', 'large', 'medium'].includes(width)" cols="12" lg="6" class="d-flex justify-center align-center">
+			<div class="animate__animated animate__backInUp animate__delay">
 				<v-img
 					src="/img/cropped-center-logo.png"
 					lazy-src="/img/cropped-center-logo.png"
 					alt="Cell"
+					:width="width === 'extra-large' ? 700 : width === 'large' ? 600 : width === 'medium' ? 400 : 300"
 				/>
 			</div>
-		</v-col>
-		<v-col cols="12" lg="6" class="d-flex justify-center">
-			<v-card flat color="transparent" class="pt-16">
-				<v-card-title class="font-weight-bold black--text display-2">
-					Hi, I'm Rangie!
-				</v-card-title>
-				<v-card-subtitle class="font-weight-bold black--text headline">
-					Web Developer
-				</v-card-subtitle>
-				<v-card-text>
-					<div class="mb-2 d-flex align-center">
-						<v-btn fab small depressed class="btn">
-							<v-icon> mdi-map-marker </v-icon>
-						</v-btn>
-						<span class="mx-2 black--text subtitle-1">
-							<span class="mx-1 font-weight-black">Address:</span>
-							<span class="font-weight-light">
-								Cebu, Philippines
-							</span>
-						</span>
-					</div>
-					<div class="mb-2 d-flex align-center">
-						<v-btn fab small depressed class="btn">
-							<v-icon> mdi-phone </v-icon>
-						</v-btn>
-						<span class="mx-2 black--text subtitle-1">
-							<span class="mx-1 font-weight-black">Phone:</span>
-							<span class="font-weight-light">
-								+639-380-738-443
-							</span>
-						</span>
-					</div>
-					<div class="mb-2 d-flex align-center">
-						<v-btn fab small depressed class="btn">
-							<v-icon> mdi-email </v-icon>
-						</v-btn>
-						<span class="mx-2 black--text subtitle-1">
-							<span class="mx-1 font-weight-black">Email:</span>
-							<span class="font-weight-light">
-								devrangie25@gmail.com
-							</span>
-						</span>
-					</div>
-					<div class="mb-2 d-flex align-center">
-						<v-btn fab small depressed class="btn">
-							<v-icon> mdi-code-tags </v-icon>
-						</v-btn>
-						<span class="mx-2 black--text subtitle-1">
-							<span class="mx-1 font-weight-black"
-								>Experience:</span
-							>
-							<span class="font-weight-light"> 1+ year </span>
-						</span>
-					</div>
-				</v-card-text>
-			</v-card>
 		</v-col>
 	</v-row>
 </template>
@@ -72,18 +48,23 @@
 export default {
 	name: "landing",
 
-	mounted() {
-		this.$nuxt.$emit('current-page', 'landing')
+	transition: {
+		afterLeave(el) {
+			console.log("afterLeave", el);
+		},
+	},
+
+	created() {
+		this.$nuxt.$emit("page-transition", "landing");
+	},
+
+	watch: {
+		width: function (val) {
+			console.log("screen width", val);
+		},
 	},
 
 	computed: {
-		isMobile() {
-			console.log("width", this.$vuetify.breakpoint.width);
-			if (this.$vuetify.breakpoint.mobile) {
-				return true;
-			}
-		},
-
 		width() {
 			const screenWidth = this.$vuetify.breakpoint.width;
 
@@ -108,21 +89,15 @@ export default {
 				return "extra-large";
 			}
 		},
-
-		isTablet() {
-			if (this.$vuetify.breakpoint.mdAndDown) {
-				return true;
-			}
-		},
-	},
-
-	created() {
-		this.$nuxt.$emit("page-transition", "landing");
 	},
 };
 </script>
 
 <style scoped>
+.btn-text {
+	letter-spacing: 0.1rem;
+}
+
 .landing-con {
 	height: 80vh;
 }

@@ -11,7 +11,7 @@
 				right
 				fab
 			>
-				<v-icon>mdi-chevron-left</v-icon>
+				<v-icon large>mdi-chevron-left</v-icon>
 			</v-btn>
 		</v-fab-transition>
 	</div>
@@ -26,22 +26,6 @@ export default {
       btnColor: 'banana_secondary'
 		};
 	},
-
-	// created() {
-	// 	this.$nuxt.$on("page-transition", (page) => {
-	// 		const pages = {
-	// 			"about-me": "banana_primary",
-	// 			"landing": "banana_secondary",
-	// 			"skills": "banana_primary",
-	// 		};
-
-	// 		this.btnColor = pages[page];
-	// 	});
-	// },
-
-	// beforeDestroy() {
-	// 	this.$nuxt.$off("page-transition");
-	// },
 
 	methods: {
 		clickUpBtn() {

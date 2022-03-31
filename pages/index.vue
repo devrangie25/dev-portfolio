@@ -1,58 +1,109 @@
 <template>
-	<div>
+	<div
+		v-touch="{
+			left: () => swipe('Left'),
+			right: () => swipe('Right'),
+			up: () => swipe('Up'),
+			down: () => swipe('Down'),
+		}"
+	>
 		<dr-o-landing v-if="page === 1" />
-		<dr-o-about-mev2 v-if="page === 2" />
+		<dr-o-about-me v-if="page === 2" />
 		<dr-o-skills v-if="page === 3" />
-		<!-- <dr-a-float-btn-down @click-down-btn="next" /> -->
-		<!-- <dr-a-float-btn-up @click-up-btn="prev" v-if="page !== 1" /> -->
+		<dr-o-experience v-if="page === 4" />
+		<dr-o-contact v-if="page === 5" />
+		<dr-a-float-btn-down v-if="['extra-large', 'large-screen', 'large', 'medium'].includes(width)" @click-down-btn="next" />
+		<dr-a-float-btn-up v-if="['extra-large', 'large-screen', 'large', 'medium'].includes(width) && page !== 1" @click-up-btn="prev" />
 	</div>
 </template>
 
 <script>
 export default {
 	name: "index-page",
-	layout(context) {
-		console.log('nuxt', context.app.nuxt)
-		console.log('ctx', context)
-		return 'main'
+	layout() {
+		return "main";
 	},
 
 	data() {
 		return {
 			isActive: false,
 			page: 1,
+			swipeDirection: "None",
 		};
 	},
 
-	created(){
-		this.$nuxt.$on('page-action', val => {
-			const pages = {
-				'landing': 1,
-				'about-me': 2,
-				'skills': 3
-			}
-
-			this.page = pages[val]
-		})
-	},
-
 	computed: {
-		isSmallScreen() {
-			if (this.$vuetify.breakpoint.lgAndUp) {
-				return true;
+		width() {
+			const screenWidth = this.$vuetify.breakpoint.width;
+
+			if (screenWidth < 600) {
+				console.log("Extra Small Screen");
+				return "extra-small";
 			}
-			return false;
-		},
+			if (screenWidth > 600 && screenWidth < 960) {
+				console.log("Small Screen");
+				return "small";
+			}
+			if (screenWidth > 960 && screenWidth < 1264) {
+				console.log("Medium Screen");
+				return "medium";
+			}
+			if (screenWidth > 1264 && screenWidth < 1904) {
+				console.log("Large Screen");
+				return "large";
+			}
+			if (screenWidth > 1904) {
+				console.log("Extra Large Screen");
+				return "extra-large";
+			}
+		}
 	},
 
 	methods: {
+		swipe(direction) {
+			this.swipeDirection = direction;
+			console.log('Swipe Direction', direction)
+
+			// Page 1
+
+			if (this.page === 1 && direction === 'Left') {
+				return this.next()
+			}
+
+			if (this.page === 1 && direction === 'Right') {
+				return
+			}
+
+			// Page 2
+
+			if (this.page === 2 && direction === 'Left') {
+				return this.next()
+			}
+
+			if (this.page === 2 && direction === 'Right') {
+				return this.prev()
+			}
+
+			// Page 3
+
+			if (this.page === 3 && direction === 'Left') {
+				return this.next()
+			}
+
+			if (this.page === 3 && direction === 'Right') {
+				return this.prev()
+			}
+		},
+
 		prev() {
-			console.log("PREV PAGE");
 			this.page--;
 		},
 
+		toTop() {
+			this.$vuetify.goTo(0);
+		},
+
 		next() {
-			console.log("NEXT PAGE");
 			this.page++;
 		},
 	},
