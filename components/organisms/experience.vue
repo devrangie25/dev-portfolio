@@ -49,7 +49,9 @@ export default {
 	name: "jobExperience",
 
 	created() {
-		this.$nuxt.$emit("page-transition", "experience");
+		if (['extra-small', 'small', 'medium'].includes(this.width)) {
+			this.$nuxt.$emit("page-transition", "experience");
+		}
 	},
 
 	computed: {
@@ -109,6 +111,6 @@ export default {
 
 <style scoped>
 .experience-con {
-	height: 80vh;
+	height: 100vh;
 }
 </style>

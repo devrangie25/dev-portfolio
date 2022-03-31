@@ -1,5 +1,5 @@
 <template>
-	<v-row no-gutters class="landing-con ">
+	<v-row no-gutters class="landing-con mt-n16">
 		<v-col cols="12" lg="6" class="d-flex justify-center align-center">
 			<v-card flat color="transparent" class="animate__animated animate__backInDown">
 				<v-card-title
@@ -48,14 +48,10 @@
 export default {
 	name: "landing",
 
-	transition: {
-		afterLeave(el) {
-			console.log("afterLeave", el);
-		},
-	},
-
 	created() {
-		this.$nuxt.$emit("page-transition", "landing");
+		if (['extra-small', 'small', 'medium'].includes(this.width)) {
+			this.$nuxt.$emit("page-transition", "landing");
+		}
 	},
 
 	watch: {
@@ -99,7 +95,7 @@ export default {
 }
 
 .landing-con {
-	height: 80vh;
+	height: 100vh;
 }
 
 .btn {

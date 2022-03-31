@@ -1,63 +1,91 @@
 <template>
-	<v-row align="center" class="about-me-con">
-		<v-col
-			v-if="['extra-large', 'large'].includes(width)"
-			cols="12"
-			lg="6"
-			class="d-flex justify-center align-center first-col animate__animated animate__backInDown rounded-lg"
-		>
-			<div>
-				<v-img
-					src="/img/big-head-1.svg"
-					lazy-src="/img/big-head-1.svg"
-					alt="Cell"
-					:width="width === 'extra-large' ? 700 : 500"
-				/>
-			</div>
-		</v-col>
-		<v-col
-			cols="12"
-			lg="6"
-			class="d-flex justify-center align-center second-col"
-		>
-			<div
-				class="font-weight-bold description banana_primary--text px-12 animate__animated animate__backInUp"
+	<v-lazy
+		v-model="isActive"
+		:options="{
+			threshold: 0.5,
+		}"
+		min-height="500"
+		transition="fade-transition"
+	>
+		<v-row align="center" class="about-me-con">
+			<v-col
+				v-if="['extra-large', 'large'].includes(width)"
+				cols="12"
+				lg="6"
+				class="d-flex justify-center align-center first-col animate__animated animate__backInDown rounded-lg"
 			>
-				<div :class="`${['extra-large', 'large'].includes(width) ? 'display-3' : 'display-1'} mb-6`">
-					About me
+				<div>
+					<v-img
+						src="/img/big-head-1.svg"
+						lazy-src="/img/big-head-1.svg"
+						alt="Cell"
+						:width="width === 'extra-large' ? 700 : 500"
+					/>
 				</div>
-				<div :class="`${width === 'extra-large' ? 'headline' : 'title' } description`">
-					{{ description }}
-				</div>
-				<div class="mt-6">
-					<v-btn
-						class="text-none rounded-lg "
-						depressed
-						width="180"
-						:height="width === 'extra-large' ? 55 : 50"
-						color="banana_primary"
-						dark
+			</v-col>
+			<v-col
+				cols="12"
+				lg="6"
+				class="d-flex justify-center align-center second-col"
+			>
+				<div
+					class="font-weight-bold description banana_primary--text px-12 animate__animated animate__backInUp"
+				>
+					<div
+						:class="`${
+							['extra-large', 'large'].includes(width)
+								? 'display-3'
+								: 'display-1'
+						} mb-6`"
 					>
-						
-						<a href="/img/updated_resume_dev_rangie.pdf" download class="text-decoration-none font-weight-black black--text"><span class="btn-text"> Download Resume </span></a>
-					</v-btn>
+						About me
+					</div>
+					<div
+						:class="`${
+							width === 'extra-large' ? 'headline' : 'title'
+						} description`"
+					>
+						{{ description }}
+					</div>
+					<div class="mt-6">
+						<v-btn
+							class="text-none rounded-lg black--text text-capitalize font-weight-black"
+							depressed
+							width="200"
+							:height="width === 'extra-large' ? 55 : 70"
+							color="banana_primary"
+							dark
+						>
+							<a
+								href="/img/updated_resume_dev_rangie.pdf"
+								download
+								class="text-decoration-none font-weight-black black--text"
+								><span class="btn-text">
+									Download Resume
+								</span></a
+							>
+						</v-btn>
+					</div>
 				</div>
-			</div>
-		</v-col>
-	</v-row>
+			</v-col>
+		</v-row>
+	</v-lazy>
 </template>
 
 <script>
 export default {
-
 	data() {
 		return {
-			description: `I graduated as scholar of Passerelles numeriques Philippines a French NGO, at the University of San Carlos - Talamban Campus with the course of Certificate of Computer Technology (CCT) major in Software Development. Programming is really one of passion aside from that, I also love playing Sports and Online Games.`,
+			isActive: false,
+			description: `I graduated as scholar of Passerelles numeriques Philippines a French NGO, at the University of San Carlos with the course of Certificate of Computer Technology (CCT) major in Software Development. Currently I am working as a Full-Stack Web Developer for one year+.
+			My forte is VueJS/NuxtJS and NodeJs. Snorkeling is one of my stress reliever, I also play desktop, and mobile online games.`,
 		};
 	},
 
 	created() {
-		this.$nuxt.$emit("page-transition", "about-me");
+		if (['extra-small', 'small', 'medium'].includes(this.width)) {
+			this.$nuxt.$emit("page-transition", "about-me");
+		}
 	},
 
 	computed: {
@@ -84,14 +112,14 @@ export default {
 				console.log("Extra Large Screen");
 				return "extra-large";
 			}
-		}
+		},
 	},
 };
 </script>
 
 <style scoped>
 .about-me-con {
-	height: 80vh;
+	height: 100vh;
 }
 
 .first-col {

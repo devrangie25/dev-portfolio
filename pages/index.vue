@@ -1,35 +1,15 @@
 <template>
-	<div
-		v-touch="{
-			left: () => swipe('Left'),
-			right: () => swipe('Right'),
-			up: () => swipe('Up'),
-			down: () => swipe('Down'),
-		}"
-	>
-		<dr-o-landing v-if="page === 1" />
-		<dr-o-about-me v-if="page === 2" />
-		<dr-o-skills v-if="page === 3" />
-		<dr-o-experience v-if="page === 4" />
-		<dr-o-contact v-if="page === 5" />
-		<dr-a-float-btn-down v-if="['extra-large', 'large-screen', 'large', 'medium'].includes(width)" @click-down-btn="next" />
-		<dr-a-float-btn-up v-if="['extra-large', 'large-screen', 'large', 'medium'].includes(width) && page !== 1" @click-up-btn="prev" />
+	<div>
+		<dr-t-desktop v-if="['extra-large', 'large'].includes(width)"/>
+		<dr-t-mobile v-if="['extra-small', 'small', 'medium'].includes(width)"/>
 	</div>
 </template>
 
 <script>
 export default {
-	name: "index-page",
+	name: "index",
 	layout() {
 		return "main";
-	},
-
-	data() {
-		return {
-			isActive: false,
-			page: 1,
-			swipeDirection: "None",
-		};
 	},
 
 	computed: {
@@ -56,55 +36,6 @@ export default {
 				console.log("Extra Large Screen");
 				return "extra-large";
 			}
-		}
-	},
-
-	methods: {
-		swipe(direction) {
-			this.swipeDirection = direction;
-			console.log('Swipe Direction', direction)
-
-			// Page 1
-
-			if (this.page === 1 && direction === 'Left') {
-				return this.next()
-			}
-
-			if (this.page === 1 && direction === 'Right') {
-				return
-			}
-
-			// Page 2
-
-			if (this.page === 2 && direction === 'Left') {
-				return this.next()
-			}
-
-			if (this.page === 2 && direction === 'Right') {
-				return this.prev()
-			}
-
-			// Page 3
-
-			if (this.page === 3 && direction === 'Left') {
-				return this.next()
-			}
-
-			if (this.page === 3 && direction === 'Right') {
-				return this.prev()
-			}
-		},
-
-		prev() {
-			this.page--;
-		},
-
-		toTop() {
-			this.$vuetify.goTo(0);
-		},
-
-		next() {
-			this.page++;
 		},
 	},
 };

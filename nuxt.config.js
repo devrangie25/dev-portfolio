@@ -52,7 +52,7 @@ export default {
     },
     {
       path: '~/components/templates/',
-      prefix: 'dr-',
+      prefix: 'dr-t',
     },
   ],
 
@@ -60,8 +60,13 @@ export default {
   buildModules: [
     // https://go.nuxtjs.dev/vuetify
     '@nuxtjs/vuetify',
-    '@nuxtjs/google-fonts'
+    '@nuxtjs/google-fonts',
+	'@nuxtjs/pwa',
   ],
+
+  pwa: {
+    icon: false // disables the icon module
+  },
 
   googleFonts: {
     families: {

@@ -1,8 +1,25 @@
 <template>
-	<v-row align="center" :class="`${['small', 'extra-small'].includes(width) ? 'mb-16' : ''} contact-con`">
-		<v-row :class="`${['small', 'extra-small'].includes(width) ? 'mt-16 mb-n12': ''}`">
-			<v-col cols="12" class="d-flex justify-center">
-				<div :class="`${['small', 'extra-small'].includes(width) ? 'display-2' : 'display-3'} white--text`">
+	<v-row
+		align="center"
+		:class="`${
+			['small', 'extra-small'].includes(width) ? 'mb-16' : ''
+		} contact-con`"
+	>
+		<v-row
+			:class="`mt-16 ${
+				['small', 'extra-small'].includes(width)
+					? 'd-flex flex-column-reverse'
+					: ''
+			}`"
+		>
+			<v-col cols="12" class="d-flex justify-center mb-16">
+				<div
+					:class="`${
+						['small', 'extra-small'].includes(width)
+							? 'display-2'
+							: 'display-3'
+					} white--text`"
+				>
 					<div>Contact me</div>
 					<v-divider
 						v-for="i in 5"
@@ -11,8 +28,6 @@
 					></v-divider>
 				</div>
 			</v-col>
-		</v-row>
-		<v-row :class="`mt-16 ${['small', 'extra-small'].includes(width) ? 'd-flex flex-column-reverse' : ''}`">
 			<v-col cols="12" md="5">
 				<div class="headline white--text font-weight-light mb-16 mt-2">
 					Contact Info
@@ -21,15 +36,13 @@
 					<v-icon color="banana_primary" size="28" class="mt-n2">
 						mdi-map-marker
 					</v-icon>
-					<span class="ml-2 title">Cebu City, Philippines</span>
+					<span class="ml-2 title">Cebu, Philippines</span>
 				</div>
 				<div class="white--text mb-10">
 					<v-icon color="banana_primary" size="28" class="mt-n1">
-						mdi-email
+						mdi-gmail
 					</v-icon>
-					<span class="ml-2 title">
-						devrangie25@gmail.com
-					</span>
+					<span class="ml-2 title"> devrangie25@gmail.com </span>
 				</div>
 				<div class="white--text mb-16">
 					<v-icon color="banana_primary" size="28" class="mt-n1">
@@ -51,12 +64,18 @@
 						>
 							mdi-linkedin
 						</v-icon>
-            <v-icon
+					</a>
+					<a
+						href="https://github.com/rLaurentePn2k19"
+						target="_blank"
+						class="text-decoration-none"
+					>
+						<v-icon
 							color="banana_primary"
 							size="28"
-							class="mt-n1 pointer-event"
+							class="mt-n1 pointer-event mr-1"
 						>
-							mdi-instagram
+							mdi-github
 						</v-icon>
 					</a>
 				</div>
@@ -142,8 +161,17 @@
 							<v-hover v-slot="{ hover }">
 								<v-btn
 									type="submit"
-									:width="['extra-large', 'large', 'medium'].includes(width) ? '30%' : '100%'"
+									:width="
+										[
+											'extra-large',
+											'large',
+											'medium',
+										].includes(width)
+											? '25%'
+											: '100%'
+									"
 									:loading="isLoading"
+									:disabled="formArr.length < 4"
 									height="70"
 									class="rounded-lg black--text text-capitalize title font-weight-black"
 									:outlined="hover"
@@ -187,10 +215,12 @@ export default {
 	},
 
 	created() {
-		this.$nuxt.$emit("page-transition", "contact");
+		if (['extra-small', 'small', 'medium'].includes(this.width)) {
+			this.$nuxt.$emit("page-transition", "contact");
+		}
 	},
 
-  computed: {
+	computed: {
 		width() {
 			const screenWidth = this.$vuetify.breakpoint.width;
 
@@ -214,7 +244,7 @@ export default {
 				console.log("Extra Large Screen");
 				return "extra-large";
 			}
-		}
+		},
 	},
 
 	watch: {
@@ -319,6 +349,9 @@ export default {
 </script>
 
 <style scoped>
+.contact-con {
+	height: 100vh;
+}
 
 .pointer-event {
 	cursor: pointer;

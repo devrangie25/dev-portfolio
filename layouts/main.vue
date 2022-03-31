@@ -1,6 +1,6 @@
 <template>
   <v-app dark :class="dynamicClass">
-    <v-app-bar app absolute :color="dynamicClass === 'bg-1' ? 'black' : 'banana_primary'" height="100" flat>
+    <v-app-bar fixed elevate-on-scroll app :color="dynamicClass === 'bg-1' ? 'black' : 'banana_primary'" height="100" flat>
       <v-container class="px-16">
         <v-row align="center">
           <picture>
@@ -12,19 +12,14 @@
             </v-img>
           </picture>
           <v-spacer></v-spacer>
-          <v-btn icon :color="dynamicClass  === 'bg-1' ? 'banana_primary' : 'banana_secondary'">
+          <v-btn href="https://www.linkedin.com/in/rangie-laurente-486600195/" target="blank" icon :color="dynamicClass  === 'bg-1' ? 'banana_primary' : 'banana_secondary'">
             <v-icon>
               mdi-linkedin
             </v-icon>
           </v-btn>
-          <v-btn icon :color="dynamicClass  === 'bg-1' ? 'banana_primary' : 'banana_secondary'">
+          <v-btn  href="https://github.com/rLaurentePn2k19" target="blank" icon :color="dynamicClass  === 'bg-1' ? 'banana_primary' : 'banana_secondary'">
             <v-icon>
-              mdi-instagram
-            </v-icon>
-          </v-btn>
-          <v-btn icon :color="dynamicClass  === 'bg-1' ? 'banana_primary' : 'banana_secondary'">
-            <v-icon>
-              mdi-gmail
+              mdi-github
             </v-icon>
           </v-btn>
         </v-row>
@@ -82,7 +77,7 @@ export default {
   },
 
   beforeDestroy(){
-    this.$nuxt.$off('about-me-page')
+    this.$nuxt.$off('page-transition')
   }
 }
 </script>

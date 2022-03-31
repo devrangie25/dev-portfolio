@@ -75,7 +75,9 @@ export default {
 	},
 
 	created() {
-		this.$nuxt.$emit("page-transition", "skills");
+		if (['extra-small', 'small', 'medium'].includes(this.width)) {
+			this.$nuxt.$emit("page-transition", "skills");
+		}
 	},
 
 	computed: {
@@ -174,7 +176,7 @@ export default {
 <style scoped>
 
 .skills-con{
-	height: 80vh;
+	height: 100vh;
 }
 
 .skills {
