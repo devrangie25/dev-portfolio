@@ -72,7 +72,7 @@ sw.*
 .nuxt
 
 # Nuxt generate
-dist
+# dist
 
 # vuepress build output
 .vuepress/dist
